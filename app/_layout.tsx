@@ -1,4 +1,3 @@
-import { useColorScheme } from "@/hooks/useColorScheme";
 import {
   DarkTheme,
   DefaultTheme,
@@ -8,11 +7,11 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import * as Updates from "expo-updates";
+import { useColorScheme } from "hooks/useColorScheme";
 import { useEffect } from "react";
 import "react-native-reanimated";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded, error] = useFonts({
     "Main-Bold": require("../assets/fonts/Almarai-Bold.ttf"),
     "Main-Regular": require("../assets/fonts/Almarai-Regular.ttf"),

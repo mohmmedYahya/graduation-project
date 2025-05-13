@@ -3,8 +3,20 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
+      "components/*": [
+        "./components/*"
+      ],
+      "theme/*": [
+        "./theme/*"
+      ],
+      "hooks/*": [
+        "./hooks/*"
+      ],
+      "assets/*": [
+        "./assets/*"
+      ],
+      "constants/*": [
+        "./constants/*"
       ]
     }
   },
