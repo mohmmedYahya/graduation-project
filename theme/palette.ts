@@ -1,6 +1,3 @@
-const tintColorLight = "#2f95dc";
-const tintColorDark = "#fff";
-
 export type ColorSchema =
   | "primary"
   | "secondary"
@@ -11,16 +8,11 @@ export type ColorSchema =
 
 // SETUP COLORS
 const PRIMARY = {
-  light: "#a993ff",
-  main: "#977DFF",
-  gradientStart: "#A48DFF",
-  dark: "#7B58FF",
+  light: "#8ac5ef",
+  main: "#156eb4",
+  dark: "#135791",
 };
-const SECONDARY = {
-  light: "#b5f1ff",
-  main: "#38D6FC",
-  dark: "#0C53B7",
-};
+
 const INFO = {
   light: "#74CAFF",
   main: "#1890FF",
@@ -74,7 +66,6 @@ const GREY = {
 const COMMON = {
   common: { black: "#000", white: "#FFF" },
   primary: { ...PRIMARY, contrastText: "#FFF" },
-  secondary: { ...SECONDARY, contrastText: "#FFF" },
   info: { ...INFO, contrastText: "#FFF" },
   success: { ...SUCCESS, contrastText: GREY[800] },
   warning: { ...WARNING, contrastText: GREY[800] },
@@ -98,11 +89,7 @@ const palette = {
     ...COMMON,
     mode: "light",
     background: { paper: "#F9F9F9", default: "#FFFF", neutral: GREY[200] },
-    tint: tintColorLight,
     input: INPUT,
-    tabIconDefault: "#ccc",
-    tabIconSelected: tintColorLight,
-    backButton: "#f2f2f7",
     shadow: {
       color: "#000000",
     },
@@ -112,10 +99,6 @@ const palette = {
     mode: "dark",
     background: { paper: "#F9F9F9", default: "#FFF", neutral: GREY[200] },
     input: INPUT,
-    tint: tintColorDark,
-    tabIconDefault: "#ccc",
-    tabIconSelected: tintColorDark,
-    backButton: "#f2f2f7",
     shadow: {
       color: GREY[900],
     },
