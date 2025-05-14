@@ -2,7 +2,7 @@ import { Typography } from "components/common";
 import { HapticTab } from "components/HapticTab";
 import { useColorScheme } from "hooks/useColorScheme";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import palette from "theme/palette";
 import { spacing } from "theme/spacing";
 
@@ -66,10 +66,3 @@ export default function TabContainer(props: any) {
     </HapticTab>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-});
