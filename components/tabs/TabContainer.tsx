@@ -24,7 +24,6 @@ export default function TabContainer(props: any) {
       style={{
         justifyContent: "flex-end",
         alignItems: "center",
-        // backgroundColor: "blue",
         height: CONTAINER_HEIGHT,
       }}
       onPress={onPress}
