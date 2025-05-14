@@ -87,7 +87,6 @@ const INPUT = {
 const palette = {
   light: {
     ...COMMON,
-    mode: "light",
     background: { paper: "#F9F9F9", default: "#FFFF", neutral: GREY[200] },
     input: INPUT,
     shadow: {
@@ -96,7 +95,6 @@ const palette = {
   },
   dark: {
     ...COMMON,
-    mode: "dark",
     background: { paper: "#F9F9F9", default: "#FFF", neutral: GREY[200] },
     input: INPUT,
     shadow: {
