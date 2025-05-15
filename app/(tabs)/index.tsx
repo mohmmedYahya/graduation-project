@@ -1,4 +1,5 @@
-import WaterTank from "components/water-tank/WaterTank";
+import HomeScreenHeader from "components/home/HomeScreenHeader";
+import WaterTank from "components/home/water-tank/WaterTank";
 import { useColorScheme } from "hooks/useColorScheme";
 import { StyleSheet, View } from "react-native";
 import palette from "theme/palette";
@@ -15,7 +16,7 @@ export default function BusinessHomeScreen() {
 
   return (
     <View style={contentContainerStyle}>
-      {/* <HomeScreenHeader /> */}
+      <HomeScreenHeader />
       <View style={styles.scheduleContainer}>
         <WaterTank />
       </View>
@@ -32,6 +33,6 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     paddingTop: DEFAULT_SPACING,
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
 });

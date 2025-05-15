@@ -62,8 +62,6 @@ const WaterTank = () => {
       </View>
 
       <View style={styles.tankContainer}>
-        {/* <LinearGradient colors={['rgba(190, 230, 250, 0.5)', 'rgba(159, 217, 245, 0.6)', 'rgba(120, 200, 240, 0.7)']} style={StyleSheet.absoluteFill} /> */}
-
         <AnimatedView
           style={[
             styles.water,

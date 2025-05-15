@@ -84,6 +84,10 @@ const INPUT = {
   slider: "#E0E8EC",
 };
 
+const BUTTON = {
+  disabled: "#BABABA",
+};
+
 const palette = {
   light: {
     ...COMMON,
@@ -92,6 +96,7 @@ const palette = {
     shadow: {
       color: "#000000",
     },
+    button: BUTTON,
   },
   dark: {
     ...COMMON,
@@ -100,6 +105,7 @@ const palette = {
     shadow: {
       color: GREY[900],
     },
+    button: BUTTON,
   },
 } as const;
 

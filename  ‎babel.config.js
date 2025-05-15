@@ -14,6 +14,7 @@ module.exports = function (api) {
             theme: "./theme",
             assets: "./assets",
             constants: "./constants",
+            utils: "./utils",
           },
         },
       ],
