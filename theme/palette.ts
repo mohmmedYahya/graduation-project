@@ -8,8 +8,8 @@ export type ColorSchema =
 
 // SETUP COLORS
 const PRIMARY = {
-  light: "#8ac5ef",
-  main: "#156eb4",
+  light: "#60A5FA",
+  main: "#3B82F6",
   dark: "#135791",
 };
 

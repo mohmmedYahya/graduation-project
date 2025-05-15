@@ -30,7 +30,7 @@ export default function ProfileBanner() {
     <View
       style={{
         ...styles.headerContainer,
-        backgroundColor: "#3B82F6",
+        backgroundColor: palette[theme].primary.main,
         paddingTop: isAllSidesSafeStyle.paddingTop,
       }}
     >
@@ -64,7 +64,7 @@ export default function ProfileBanner() {
           <View
             style={{
               ...styles.editAction,
-              backgroundColor: "#60A5FA",
+              backgroundColor: palette[theme].primary.light,
             }}
           >
             <Typography
