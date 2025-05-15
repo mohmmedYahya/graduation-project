@@ -1,125 +1,108 @@
-import { Image } from "expo-image";
-import { Platform, StyleSheet } from "react-native";
+import AppPolicyIcon from "assets/icons/AppPolicyIcon";
+import LogoutIcon from "assets/icons/auth/LogoutIcon";
+import LogoutSheet from "assets/icons/auth/LogoutSheet";
+import ContactUsIcon from "assets/icons/ContactUsIcon";
+import { Typography } from "components/common";
+import ProfileBanner from "components/profile/ProfileBanner";
+import ProfileMenuItem from "components/profile/ProfileMenuItem";
+import {
+  MOBILE_BUNDLE_VERSION,
+  TERMS_AND_CONDITIONS_URL,
+} from "constants/common";
+import { useColorScheme } from "hooks/useColorScheme";
+import React, { ReactElement } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
+import palette from "theme/palette";
+import { DEFAULT_SPACING, spacing } from "theme/spacing";
 
-import { MaterialIcons } from "@expo/vector-icons";
-import { Collapsible } from "components/Collapsible";
-import { ExternalLink } from "components/ExternalLink";
-import ParallaxScrollView from "components/ParallaxScrollView";
-import { ThemedText } from "components/ThemedText";
-import { ThemedView } from "components/ThemedView";
+export interface IProfileMenuItem {
+  text: string;
+  href?: string;
+  icon: ReactElement;
+  onPress?: () => void;
+  showLeftArrowIcon?: boolean;
+  value?: string;
+  isVisible?: boolean;
+}
+export default function Profile() {
+  const theme = useColorScheme();
+  const [openLogoutConfirmationModal, setOpenLogoutConfirmationModal] =
+    React.useState<boolean>(false);
 
-export default function ProfileScreen() {
+  const handleOpenLogoutModal = async () =>
+    setOpenLogoutConfirmationModal(true);
+  const handleCloseLogoutModal = async () =>
+    setOpenLogoutConfirmationModal(false);
+
+  const profileItems = [
+    {
+      text: "الشروط والاحكام",
+      href: TERMS_AND_CONDITIONS_URL,
+      icon: <AppPolicyIcon />,
+    },
+    {
+      text: "تواصل معنا",
+      href: "/profile/contact-us",
+      icon: <ContactUsIcon />,
+    },
+    {
+      text: "تسجيل الخروج",
+      onPress: handleOpenLogoutModal,
+      icon: <LogoutIcon />,
+    },
+  ];
+
+  const contentContainerStyle = {
+    ...styles.container,
+    backgroundColor: palette[theme].background.paper,
+    paddingBottom: DEFAULT_SPACING / 2,
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
-      headerImage={
-        <MaterialIcons size={310} color="#808080" name="chevron-left" />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>
-        This app includes example code to help you get started.
-      </ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          and{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{" "}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the
-          web version, press <ThemedText type="defaultSemiBold">w</ThemedText>{" "}
-          in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the{" "}
-          <ThemedText type="defaultSemiBold">@2x</ThemedText> and{" "}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to
-          provide files for different screen densities
-        </ThemedText>
-        <Image
-          source={require("assets/images/react-logo.png")}
-          style={{ alignSelf: "center" }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText>{" "}
-          to see how to load{" "}
-          <ThemedText style={{ fontFamily: "SpaceMono" }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{" "}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook
-          lets you inspect what the user&apos;s current color scheme is, and so
-          you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{" "}
-          <ThemedText type="defaultSemiBold">
-            components/HelloWave.tsx
-          </ThemedText>{" "}
-          component uses the powerful{" "}
-          <ThemedText type="defaultSemiBold">
-            react-native-reanimated
-          </ThemedText>{" "}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The{" "}
-              <ThemedText type="defaultSemiBold">
-                components/ParallaxScrollView.tsx
-              </ThemedText>{" "}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <>
+      <View style={contentContainerStyle}>
+        <ProfileBanner />
+        <ScrollView
+          style={{ flex: 1, width: "100%" }}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            ...styles.profileMenu,
+          }}
+        >
+          {profileItems.map((item: IProfileMenuItem, index) => (
+            <ProfileMenuItem {...item} key={`${index}_${item.text}`} />
+          ))}
+        </ScrollView>
+        <View style={styles.appInfo}>
+          <Typography
+            variant="label"
+            style={{ color: palette[theme].text.light }}
+          >{`V: ${MOBILE_BUNDLE_VERSION}`}</Typography>
+        </View>
+      </View>
+      <LogoutSheet
+        visible={openLogoutConfirmationModal}
+        handleCloseSheet={handleCloseLogoutModal}
+      />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: "#808080",
-    bottom: -90,
-    left: -35,
-    position: "absolute",
+  container: {
+    width: "100%",
+    flex: 1,
   },
-  titleContainer: {
-    flexDirection: "row",
-    gap: 8,
+  profileMenu: {
+    width: "100%",
+    gap: spacing(3),
+    padding: DEFAULT_SPACING,
+    marginTop: spacing(4),
+    flex: 1,
+  },
+  appInfo: {
+    width: "100%",
+    alignItems: "flex-start",
+    paddingHorizontal: DEFAULT_SPACING,
   },
 });

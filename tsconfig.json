@@ -20,7 +20,14 @@
       ],
       "utils/*": [
         "./utils/*"
-      ]
+      ],
+      "providers/*": [
+        "./providers/*"
+      ],
+      "atoms/*": [
+        "./atoms/*"
+      ],
+
     }
   },
   "include": [

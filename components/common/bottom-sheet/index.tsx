@@ -1,6 +1,5 @@
 import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
 import { isIOSDevice, isSmallScreen, SCREEN_HEIGHT } from "constants/common";
-import { useColorScheme } from "hooks/useColorScheme";
 import { useMemo } from "react";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 import { Easing } from "react-native-reanimated";
@@ -18,7 +17,6 @@ export interface IBottomSheet {
   closeOnBackDropPress?: boolean;
 }
 const DynamicSheetModal = (props: IBottomSheet) => {
-  const theme = useColorScheme();
   const {
     children,
     style,
@@ -63,7 +61,7 @@ const DynamicSheetModal = (props: IBottomSheet) => {
         style={[
           styles.contentContainer,
           {
-            backgroundColor: palette[theme].common.white,
+            backgroundColor: palette.light.common.white,
             maxHeight: SCREEN_HEIGHT * 0.9,
           },
           style,
