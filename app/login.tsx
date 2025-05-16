@@ -5,7 +5,7 @@ import Button from "components/common/Button";
 import Typography from "components/common/Typography";
 import { SCREEN_HEIGHT } from "constants/common";
 import { useColorScheme } from "hooks/useColorScheme";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import palette from "theme/palette";
 import { DEFAULT_SPACING, spacing } from "theme/spacing";
@@ -18,8 +18,39 @@ export default function LoginPhoneForm() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<string>("");
 
-  const loginHandler = () => {};
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const onBlurEmail = () => {
+    if (!email?.trim() || validateEmail(email)) {
+      setEmailError("");
+      return;
+    }
+    setEmailError("يرجى إدخال بريد إلكتروني صالح");
+  };
+
+  const handleEmailChange = (e: any) => {
+    const newEmail = e.nativeEvent.text;
+    setEmail(newEmail);
+  };
+
+  const loginHandler = () => {
+    if (email.trim() === "" || !validateEmail(email)) {
+      setEmailError("يرجى إدخال بريد إلكتروني صالح");
+      return;
+    }
+
+    // باقي منطق تسجيل الدخول
+  };
+
+  const isDataValid = useMemo(
+    () => email.trim() && validateEmail(email) && password.trim().length > 3,
+    [email, password]
+  );
 
   return (
     <KeyboardSafeScreenContainer>
@@ -43,22 +74,26 @@ export default function LoginPhoneForm() {
             }}
           >
             <View style={styles.inputContainer}>
-              <TextInput
-                testID="login_phone_input"
-                placeholder={"البريد الالكتروني"}
-                keyboardType="email-address"
-                value={email}
-                onChange={(e) => setEmail(e.nativeEvent.text)}
-                textContentType="emailAddress"
-                autoComplete="email"
-                enterKeyHint="done"
-                style={{
-                  height: phoneInputSize,
-                  ...typography.heading5,
-                  lineHeight: 21,
-                }}
-                fieldStyle={{ marginVertical: 0 }}
-              />
+              <View style={{ width: "100%" }}>
+                <TextInput
+                  testID="login_phone_input"
+                  placeholder={"البريد الالكتروني"}
+                  keyboardType="email-address"
+                  value={email}
+                  onChange={handleEmailChange}
+                  textContentType="emailAddress"
+                  autoComplete="email"
+                  enterKeyHint="done"
+                  style={{
+                    height: phoneInputSize,
+                    ...typography.heading5,
+                    lineHeight: 21,
+                  }}
+                  fieldStyle={{ marginVertical: 0 }}
+                  errorMessage={emailError}
+                  onBlur={onBlurEmail}
+                />
+              </View>
               <TextInput
                 testID="login_phone_input"
                 placeholder={"كلمة السر"}
@@ -74,6 +109,7 @@ export default function LoginPhoneForm() {
                   lineHeight: 21,
                 }}
                 fieldStyle={{ marginVertical: 0 }}
+                secureTextEntry
               />
             </View>
             <View style={{ width: "100%" }}>
@@ -81,7 +117,7 @@ export default function LoginPhoneForm() {
                 testID="login_btn"
                 text={"تسجيل الدخول"}
                 onPress={loginHandler}
-                disabled={isLoading}
+                disabled={isLoading || !isDataValid}
                 loading={isLoading}
               />
             </View>
@@ -106,8 +142,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: "100%",
     alignItems: "flex-start",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: "column",
     gap: DEFAULT_SPACING,
     minHeight: phoneInputSize * 2.5,
   },
