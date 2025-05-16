@@ -1,8 +1,8 @@
 import { userSessionAtom } from "atoms/userSession";
-import { useRecoilValue } from "recoil";
+import { getRecoil } from "recoil-nexus";
 
 export default function useAuth() {
-  const { user } = useRecoilValue(userSessionAtom) || {};
+  const { user } = getRecoil(userSessionAtom) || {};
 
   const isUserLoggedIn = !!user;
   return {

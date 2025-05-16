@@ -1,7 +1,8 @@
 import { IUserSession, userSessionAtom } from "atoms/userSession";
 import axios from "axios";
+import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { setRecoil } from "recoil-nexus";
 
@@ -22,22 +23,32 @@ export const getSession = async () => {
     return parsedSession;
   } catch (err) {
     console.error(err);
+    return null;
   }
 };
 
 const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const router = useRouter();
   const setUserSession = useSetRecoilState(userSessionAtom);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const loadSessionData = async () => {
-      const session = await getSession();
-      if (session) {
-        setUserSession(session || null);
-        axios.defaults.headers.common["Authorization"] = session?.token;
+      try {
+        const session = await getSession();
+        if (session) {
+          setUserSession(session);
+          axios.defaults.headers.common["Authorization"] = session?.token || "";
+          return;
+        }
+        router.push("/login");
+      } catch (error) {
+        console.error("Error loading session:", error);
+        router.push("/login");
       }
     };
+
     loadSessionData();
-  }, []);
+  }, [router, setUserSession]);
 
   return <>{children}</>;
 };
