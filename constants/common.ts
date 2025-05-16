@@ -11,3 +11,4 @@ export const ANDROID_BOTTOM_PADDING = !isIOSDevice ? spacing(5.5) : 0;
 export const TERMS_AND_CONDITIONS_URL = `https://wrsm.com/terms-conditions`;
 export const PRIVACY_POLICY_URL = `https://wrsm.com/policy`;
 export const BACK_ICON_SIZE = spacing(12);
+export const INPUT_LABEL_MARGIN = spacing(2);

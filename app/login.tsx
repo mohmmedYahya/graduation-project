@@ -1,6 +1,6 @@
 import TankLogo from "assets/icons/TankLogo";
 import LoggedInUserWrapper from "components/auth/LoggedInUserWrapper";
-import { KeyboardSafeScreenContainer } from "components/common";
+import { KeyboardSafeScreenContainer, TextInput } from "components/common";
 import Button from "components/common/Button";
 import Typography from "components/common/Typography";
 import { SCREEN_HEIGHT } from "constants/common";
@@ -9,11 +9,14 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import palette from "theme/palette";
 import { DEFAULT_SPACING, spacing } from "theme/spacing";
+import typography from "theme/typography";
 
 const phoneInputSize = spacing(9.5);
 
 export default function LoginPhoneForm() {
   const theme = useColorScheme();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const loginHandler = () => {};
@@ -39,7 +42,40 @@ export default function LoginPhoneForm() {
               height: SCREEN_HEIGHT * 0.22,
             }}
           >
-            <View style={styles.inputContainer}></View>
+            <View style={styles.inputContainer}>
+              <TextInput
+                testID="login_phone_input"
+                placeholder={"البريد الالكتروني"}
+                keyboardType="email-address"
+                value={email}
+                onChange={(e) => setEmail(e.nativeEvent.text)}
+                textContentType="emailAddress"
+                autoComplete="email"
+                enterKeyHint="done"
+                style={{
+                  height: phoneInputSize,
+                  ...typography.heading5,
+                  lineHeight: 21,
+                }}
+                fieldStyle={{ marginVertical: 0 }}
+              />
+              <TextInput
+                testID="login_phone_input"
+                placeholder={"كلمة السر"}
+                keyboardType="default"
+                value={password}
+                onChange={(e) => setPassword(e.nativeEvent.text)}
+                textContentType="password"
+                autoComplete="password"
+                enterKeyHint="done"
+                style={{
+                  height: phoneInputSize,
+                  ...typography.heading5,
+                  lineHeight: 21,
+                }}
+                fieldStyle={{ marginVertical: 0 }}
+              />
+            </View>
             <View style={{ width: "100%" }}>
               <Button
                 testID="login_btn"
